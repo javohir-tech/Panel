@@ -9,9 +9,11 @@ require("dotenv").config()
 //middlewares
 app.use(express.json())
 
+//router
+app.use("/api/post", require("./routes/post.router"))
+
 
 const PORT = process.env.PORT;
-
 
 const startApp = async () => {
     try {
