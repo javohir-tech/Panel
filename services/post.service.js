@@ -18,6 +18,11 @@ class PostService {
         })
         return editPost
     }
+
+    async delete(id){
+        const deletePost =  await postModel.findByIdAndDelete(id)
+        return deletePost
+    }
 }
 
 module.exports = new PostService()

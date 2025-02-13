@@ -31,6 +31,19 @@ class PostController {
             res.status(500).json(`put post error: ${error}`)
         }
     }
+
+    async delete(req, res) {
+        try {
+            const {id} = req.params
+            const deletePost = await postService.delete(id)
+            if(!deletePost){
+                return res.status(500).json({message:"Post not Found"})
+            }
+            res.status(200).json(deletePost)
+        } catch (error) {
+            res.status(500).json(`delete post error : ${error}`)
+        }
+    }
 }
 
 module.exports = new PostController()
