@@ -7,9 +7,16 @@ class PostService {
         return allPosts
     }
 
-    async create(post){
+    async create(post) {
         const newPost = await postModel.create(post)
         return newPost
+    }
+
+    async edit(post, id) {
+        const editPost = await postModel.findByIdAndUpdate(id, post, {
+            new: true
+        })
+        return editPost
     }
 }
 

@@ -2,7 +2,7 @@ const postService = require("../services/post.service")
 
 
 class PostController {
-    async getAll(req, res){
+    async getAll(req, res) {
         try {
             const allPosts = await postService.getAll()
             res.status(200).json(allPosts)
@@ -11,12 +11,24 @@ class PostController {
         }
     }
 
-    async create(req, res){
+    async create(req, res) {
         try {
-            const post =  await postService.create(req.body)
+            const post = await postService.create(req.body)
             res.status(201).json(post)
         } catch (error) {
             res.status(500).json(`create post error : ${error}`)
+        }
+    }
+
+    async edit(req, res) {
+        try {
+            const putPost = await postService.edit(req.body, req.params.id)
+            if (!putPost) {
+                return res.status(200).json({ message: "post not found" })
+            }
+            res.status(200).json({ message: "successfully edit", putPost })
+        } catch (error) {
+            res.status(500).json(`put post error: ${error}`)
         }
     }
 }
